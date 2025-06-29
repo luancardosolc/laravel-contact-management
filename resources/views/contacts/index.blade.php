@@ -24,6 +24,15 @@
         @endauth
     </div>
 
+    <div class="mb-6">
+        <form action="{{ route('contacts.index') }}" method="GET" class="flex items-center max-w-sm">
+            <input type="text" name="search" placeholder="Search by name, contact, or email..." value="{{ request('search') }}" class="w-full px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white font-medium rounded-r-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Search
+            </button>
+        </form>
+    </div>
+
     <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
