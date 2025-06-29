@@ -19,15 +19,24 @@
             <div class="space-y-6">
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
-                    <input type="text" name="name" id="name" required class="mt-1 block w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white">
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" required class="mt-1 block w-full bg-white dark:bg-gray-700 border @error('name') border-red-500 @else border-gray-300 dark:border-gray-600 @enderror rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white">
+                    @error('name')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div>
                     <label for="contact" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Contact</label>
-                    <input type="text" name="contact" id="contact" required class="mt-1 block w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white">
+                    <input type="text" name="contact" id="contact" value="{{ old('contact') }}" required class="mt-1 block w-full bg-white dark:bg-gray-700 border @error('contact') border-red-500 @else border-gray-300 dark:border-gray-600 @enderror rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white">
+                    @error('contact')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
-                    <input type="email" name="email" id="email" required class="mt-1 block w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white">
+                    <input type="email" name="email" id="email" value="{{ old('email') }}" required class="mt-1 block w-full bg-white dark:bg-gray-700 border @error('email') border-red-500 @else border-gray-300 dark:border-gray-600 @enderror rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white">
+                    @error('email')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
             <div class="mt-8">
