@@ -64,6 +64,18 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
+    public function it_validates_phone_number_format_when_creating_a_contact()
+    {
+        $response = $this->actingAs($this->admin)->post(route('contacts.store'), [
+            'name' => 'New Contact',
+            'contact' => 'not-a-phone-number',
+            'email' => 'new@example.com',
+        ]);
+
+        $response->assertSessionHasErrors(['contact']);
+    }
+
+    /** @test */
     public function it_requires_authentication_to_edit_contact()
     {
         $contact = Contact::factory()->create();
@@ -108,5 +120,19 @@ class ContactControllerTest extends TestCase
         ]);
 
         $response->assertSessionHasErrors(['email']);
+    }
+
+    /** @test */
+    public function it_validates_phone_number_format_when_updating_a_contact()
+    {
+        $contact = Contact::factory()->create();
+
+        $response = $this->actingAs($this->admin)->put(route('contacts.update', $contact), [
+            'name' => 'Updated Name',
+            'contact' => 'not-a-phone-number',
+            'email' => 'updated@example.com',
+        ]);
+
+        $response->assertSessionHasErrors(['contact']);
     }
 }

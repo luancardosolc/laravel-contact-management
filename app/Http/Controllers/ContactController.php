@@ -51,7 +51,7 @@ class ContactController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'contact' => 'required|string|max:20|unique:contacts',
+            'contact' => 'required|phone:AUTO|max:20|unique:contacts',
             'email' => 'required|string|email|max:255|unique:contacts',
         ]);
 
@@ -83,7 +83,7 @@ class ContactController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'contact' => ['required', 'string', 'max:20', Rule::unique('contacts')->ignore($contact->id)],
+            'contact' => ['required', 'phone:AUTO', 'max:20', Rule::unique('contacts')->ignore($contact->id)],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('contacts')->ignore($contact->id)],
         ]);
 
