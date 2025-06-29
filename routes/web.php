@@ -21,5 +21,5 @@ Route::get('/', function () {
 
 Route::resource('contacts', ContactController::class);
 
-Route::get('login/admin', [LoginController::class, 'loginAsAdmin'])->name('login.admin');
+Route::get('login', [LoginController::class, 'loginAsAdmin'])->name('login');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
