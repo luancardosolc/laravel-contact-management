@@ -43,6 +43,7 @@
                         {{ $contact->updated_at->format('M d, Y H:i') }}</p>
                 </div>
             </div>
+            @auth
             <div class="mt-8 flex justify-end space-x-4">
                 <a href="{{ route('contacts.edit', $contact) }}"
                     class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200">
@@ -58,6 +59,7 @@
                     </button>
                 </form>
             </div>
+            @endauth
         </div>
     </div>
 @endsection
