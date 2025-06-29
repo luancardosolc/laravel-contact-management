@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ContactController extends Controller
 {
@@ -12,7 +13,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::paginate(15);
+        $contacts = Contact::latest()->paginate(15);
         return view('contacts.index', compact('contacts'));
     }
 
@@ -21,7 +22,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        return view('contacts.create');
     }
 
     /**
@@ -29,7 +30,15 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'contact' => 'required|string|max:20|unique:contacts',
+            'email' => 'required|string|email|max:255|unique:contacts',
+        ]);
+
+        Contact::create($validatedData);
+
+        return redirect()->route('contacts.index')->with('success', 'Contact created successfully.');
     }
 
     /**
@@ -37,7 +46,7 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        //
+        return view('contacts.show', compact('contact'));
     }
 
     /**
@@ -45,7 +54,7 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        //
+        return view('contacts.edit', compact('contact'));
     }
 
     /**
@@ -53,7 +62,15 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'contact' => ['required', 'string', 'max:20', Rule::unique('contacts')->ignore($contact->id)],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('contacts')->ignore($contact->id)],
+        ]);
+
+        $contact->update($validatedData);
+
+        return redirect()->route('contacts.index')->with('success', 'Contact updated successfully.');
     }
 
     /**
@@ -61,6 +78,8 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        $contact->delete();
+
+        return redirect()->route('contacts.index')->with('success', 'Contact deleted successfully.');
     }
 }
