@@ -76,3 +76,16 @@ To run a specific test suite (e.g., Feature tests):
 ```sh
 ./vendor/bin/phpunit --testsuite Feature
 ```
+
+### Important Note on Testing
+
+The feature tests use the `RefreshDatabase` trait, which means **your database will be completely wiped and re-migrated before the tests run**. This is to ensure a clean and predictable database state for every test.
+
+To avoid losing your development data, it is highly recommended to use a separate database for testing. You can configure a dedicated testing database in the `phpunit.xml` file. For a fast and isolated testing environment, you can use an in-memory SQLite database by uncommenting the following lines in your `phpunit.xml`:
+
+```xml
+<env name="DB_CONNECTION" value="sqlite"/>
+<env name="DB_DATABASE" value=":memory:"/>
+```
+
+This configuration ensures that your tests run against a temporary, in-memory database, leaving your main
